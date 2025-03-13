@@ -1,31 +1,18 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using NewsScoreBackend.API.Models;
+using NewsScoreBackend.API.Services;
 
 namespace NewsScoreBackend.API.Controllers;
 
+[Route("api")]
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    [HttpPost]
+    [Route("newsscore")]
+    public int GetNewsScore([FromBody] Measurements measurements)
     {
-        _logger = logger;
-    }
-
-    public IActionResult Index()
-    {
-        return View();
-    }
-
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
+        var newsscoreService = new NewsscoreService();
+        return newsscoreService.CalculateNewsScore(measurements);
     }
 }
