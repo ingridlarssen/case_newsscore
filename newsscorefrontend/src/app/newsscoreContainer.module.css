@@ -1,0 +1,45 @@
+.newsscoreContainer {
+  width: 40%;
+  padding-top: 40px;
+}
+
+.input {
+  background-color: #faf6ff;
+  padding: 10px;
+  border: 1px;
+  border-color: #7424da;
+  width: 100%;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.buttonContainer {
+  margin-top: 30px;
+}
+
+.button {
+  border: none;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #faf6ff;
+}
+
+.submitButton {
+  border: none;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #7424da;
+  color: white;
+  margin-right: 10px;
+}
+
+.resultsContainer {
+  margin-top: 30px;
+  background-color: #faf6ff;
+  border: 1px solid #7424da;
+  border-radius: 10px;
+  width: 100%;
+  padding: 10px;
+}
