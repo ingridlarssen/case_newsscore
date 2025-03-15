@@ -10,9 +10,17 @@ public class HomeController : Controller
 
     [HttpPost]
     [Route("newsscore")]
-    public int GetNewsScore([FromBody] Measurements measurements)
+    public ActionResult<int> GetNewsScore([FromBody] Measurements measurements)
     {
         var newsscoreService = new NewsscoreService();
-        return newsscoreService.CalculateNewsScore(measurements);
+        try
+        {
+            var score = newsscoreService.CalculateNewsScore(measurements);
+            return Ok(score);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
     }
 }
