@@ -2,7 +2,7 @@ namespace NewsScoreBackend.API.Models;
 
 public class Measurements
 {
-    public int Heartrate { get; set; }
-    public int RespiratoryRate { get; set; }
-    public int Temperature { get; set; }
+    public double Heartrate { get; set; }
+    public double RespiratoryRate { get; set; }
+    public double Temperature { get; set; }
 }

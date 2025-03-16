@@ -2,7 +2,7 @@ namespace NewsScoreBackend.API.Services;
 
 public static class NewsScoreHelper
 {
-    public static int GetTemperatureScore(int temperature)
+    public static int GetTemperatureScore(double temperature)
     {
         var temperatureScores = new List<Interval>
         {
@@ -16,7 +16,7 @@ public static class NewsScoreHelper
         return temperatureScores.First(x => temperature > x.Min && temperature <= x.Max).Score;
     }
     
-    public static int GetHeartRateScore(int heartRate)
+    public static int GetHeartRateScore(double heartRate)
     {
         var heartRateScores = new List<Interval>
         {
@@ -31,7 +31,7 @@ public static class NewsScoreHelper
         return heartRateScores.First(x => heartRate > x.Min && heartRate <= x.Max).Score;
     }
     
-    public static int GetRespiratoryRateScore(int respiratoryRate)
+    public static int GetRespiratoryRateScore(double respiratoryRate)
     {
         var respiratoryRateScores = new List<Interval>
         {
