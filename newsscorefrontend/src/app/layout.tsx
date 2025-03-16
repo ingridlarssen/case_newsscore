@@ -10,8 +10,6 @@ export default function RootLayout({
     <html lang='en'>
       <body>
         <NewsscoreContainer />
-        <main>{children}</main>
-        {children}
       </body>
     </html>
   );
