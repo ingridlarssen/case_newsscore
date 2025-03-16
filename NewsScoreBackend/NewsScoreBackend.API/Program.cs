@@ -1,3 +1,5 @@
+using NewsScoreBackend.API.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
@@ -10,8 +12,9 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Add services to the container.
+var newsscoreService = new NewsscoreService();
 builder.Services.AddControllers();
+builder.Services.AddScoped<NewsscoreService>();
 
 var app = builder.Build();
 

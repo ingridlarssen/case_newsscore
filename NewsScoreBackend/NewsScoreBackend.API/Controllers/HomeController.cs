@@ -8,14 +8,20 @@ namespace NewsScoreBackend.API.Controllers;
 public class HomeController : Controller
 {
 
+    private NewsscoreService _newsscoreService;
+
+    public HomeController(NewsscoreService newsscoreService)
+    {
+        _newsscoreService = newsscoreService;
+    }
+    
     [HttpPost]
     [Route("newsscore")]
     public ActionResult<int> GetNewsScore([FromBody] Measurements measurements)
     {
-        var newsscoreService = new NewsscoreService();
         try
         {
-            var score = newsscoreService.CalculateNewsScore(measurements);
+            var score = _newsscoreService.CalculateNewsScore(measurements);
             return Ok(score);
         }
         catch (Exception ex)
