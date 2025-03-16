@@ -17,11 +17,12 @@ public class HomeController : Controller
     
     [HttpPost]
     [Route("newsscore")]
-    public ActionResult<int> GetNewsScore([FromBody] Measurements measurements)
+    //retur type må oppdateres
+    public ActionResult<Newsscore> GetNewsScore([FromBody] MeasurementList measurementList)
     {
         try
         {
-            var score = _newsscoreService.CalculateNewsScore(measurements);
+            var score = _newsscoreService.CalculateNewsScore(measurementList);
             return Ok(score);
         }
         catch (Exception ex)

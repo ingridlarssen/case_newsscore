@@ -17,17 +17,21 @@ export default function NewsscoreContainer() {
 
   const getNewsScore = async () => {
     try {
-      const response = await FetchNewsscore({
-        temperature: Number(temperature),
-        heartrate: Number(heartRate),
-        respiratoryrate: Number(respiratoryRate),
-      });
+      var requestBody = {
+        measurements: [
+          { type: 'TEMP', value: Number(temperature) },
+          { type: 'HR', value: Number(heartRate) },
+          { type: 'RR', value: Number(respiratoryRate) },
+        ],
+      };
+
+      const response = await FetchNewsscore(requestBody);
 
       const responseObject = await response.json();
 
       if (response.ok) {
         setError(undefined);
-        setNewsscore(responseObject);
+        setNewsscore(responseObject.score);
       } else {
         setNewsscore(undefined);
         setError(responseObject.message);

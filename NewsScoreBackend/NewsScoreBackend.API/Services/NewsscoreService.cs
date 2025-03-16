@@ -1,34 +1,60 @@
 using NewsScoreBackend.API.Models;
+using Exception = System.Exception;
 
 namespace NewsScoreBackend.API.Services;
 
 public class NewsscoreService
 {
-    public int CalculateNewsScore(Measurements measurements)
+    public Newsscore CalculateNewsScore(MeasurementList measurementList)
     {
-        ValidateMeasurementValues(measurements);
-        
-        var temperatureScore = NewsScoreHelper.GetTemperatureScore(measurements.Temperature);
-        var heartRateScore = NewsScoreHelper.GetHeartRateScore(measurements.Heartrate);
-        var respiratoryRate = NewsScoreHelper.GetRespiratoryRateScore(measurements.RespiratoryRate);
-        
-        return temperatureScore + heartRateScore + respiratoryRate;
+        ValidateMeasurementValues(measurementList);
+
+        var score = measurementList.Measurements.Select(measurement =>
+        {
+            if (measurement.Type == MeasurementType.TEMP)
+            {
+                return NewsScoreHelper.GetTemperatureScore(measurement.Value);
+            }
+
+            if (measurement.Type == MeasurementType.RR)
+            {
+                return NewsScoreHelper.GetRespiratoryRateScore(measurement.Value);
+            }
+
+            if (measurement.Type == MeasurementType.HR)
+            {
+                return NewsScoreHelper.GetHeartRateScore(measurement.Value);
+            }
+
+            return 0;
+        });
+
+        return new Newsscore
+        {
+            Score = score.Sum(),
+        };
     }
 
-    private void ValidateMeasurementValues(Measurements measurements)
+    private void ValidateMeasurementValues(MeasurementList measurementList)
     {
-        if (measurements.Heartrate < 25 || measurements.Heartrate > 220)
+        foreach (var measurement in measurementList.Measurements)
         {
-            throw new Exception($"Invalid value for heartrate");
-        }
-        if (measurements.RespiratoryRate < 3 || measurements.RespiratoryRate > 60)
-        {
-            throw new Exception($"Invalid value for respiratory rate");
+            if (measurement.Type == MeasurementType.HR && (measurement.Value < 25 || measurement.Value > 220))
+            {
+                throw new Exception("Invalid value for heartrate");
+            }
+            
+            if (measurement.Type == MeasurementType.RR && (measurement.Value < 3 || measurement.Value > 60))
+            {
+                throw new Exception($"Invalid value for respiratory rate");
+            }
+
+            if (measurement.Type == MeasurementType.TEMP && (measurement.Value < 31 || measurement.Value > 42))
+            {
+                throw new Exception($"Invalid value for temperature");
+            }
+            
         }
 
-        if (measurements.Temperature < 31 || measurements.Temperature > 42)
-        {
-            throw new Exception($"Invalid value for temperature");
-        }
     }
 }

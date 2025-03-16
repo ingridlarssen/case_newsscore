@@ -1,7 +1,5 @@
 export async function FetchNewsscore(request: {
-  temperature: number;
-  heartrate: number;
-  respiratoryrate: number;
+  measurements: { type: string; value: number }[];
 }) {
   const response = await fetch('http://localhost:5166/api/newsscore', {
     method: 'POST',
