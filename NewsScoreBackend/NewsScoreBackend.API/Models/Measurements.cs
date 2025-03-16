@@ -1,12 +1,6 @@
-using System.Diagnostics.Metrics;
 using System.Text.Json.Serialization;
 
 namespace NewsScoreBackend.API.Models;
-
-public class Newsscore
-{
-    public int Score { get; set; }
-}
 
 public class MeasurementList
 {

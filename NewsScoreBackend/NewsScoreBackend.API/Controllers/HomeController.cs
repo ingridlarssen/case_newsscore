@@ -17,7 +17,6 @@ public class HomeController : Controller
     
     [HttpPost]
     [Route("newsscore")]
-    //retur type må oppdateres
     public ActionResult<Newsscore> GetNewsScore([FromBody] MeasurementList measurementList)
     {
         try
