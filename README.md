@@ -4,7 +4,7 @@
 - Fra terminalen, gå til /newsscoreBackend og kjør `dotnet run --project NewsScoreBackend.API`
 
 ### Mangler og antagelser
-- Ingen validering på type eller verdier - antar at bruker skriver inn tall
+- Ingen validering på type eller verdier - antar at bruker skriver inn tall. Bruker får generelt litt lite hjelp i frontend
 - Ved desimaltall må bruker skrive punktum - ikke komma (åpenbart ikke brukervennlig, men ble ikke prioritert å fikse)
 - 0 tester
 
