@@ -5,6 +5,7 @@
 
 ### Mangler og antagelser
 - Ingen validering på type eller verdier - antar at bruker skriver inn tall
+- Ved desimaltall må bruker skrive punktum - ikke komma (åpenbart ikke brukervennlig, men ble ikke prioritert å fikse)
 - 0 tester
 
 Skjermbilde av skjema med newsscore resultat
